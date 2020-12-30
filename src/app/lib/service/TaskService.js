@@ -1,10 +1,14 @@
 export default class TaskService {
-  constructor(taskDao) {
-    this._taskDao = taskDao;
+  constructor(
+    unitOfWork,
+    taskRepository,
+  ) {
+    this._unitOfWork = unitOfWork;
+    this._taskRepository = taskRepository;
   }
 
   getAll() {
-    return this._taskDao.getAll();
+    return this._taskRepository.getAll();
   }
 
   add(task) {
@@ -12,12 +16,18 @@ export default class TaskService {
       throw new Error('Task is invalid!', task.validationResults());
 
     if (task.id)
-      this._taskDao.update(task);
+      this._taskRepository.update(task);
     else
-      this._taskDao.add(task);
+      this._taskRepository.add(task);
+
+    this._unitOfWork.save();
   }
 
   remove(task) {
-    this._taskDao.remove(task);
+    this._taskRepository.remove(task);
+  }
+
+  close(){
+    this._unitOfWork.close();
   }
 }
