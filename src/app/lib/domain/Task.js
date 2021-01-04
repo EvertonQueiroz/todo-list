@@ -1,35 +1,40 @@
 import Entity from "./core/Entity";
 
 export default class Task extends Entity {
+  #title;
+  #description;
+  #comments;
+
   constructor(title){
-    this._title = title;
-    this._description = '';
-    this._comments = [];
+    super();
+    this.#title = title;
+    this.#description = '';
+    this.#comments = [];
   }
 
   get title() {
-    return this._title;
+    return this.#title;
   }
 
   get description() {
-    return this._description;
+    return this.#description;
   }
 
   set description(value) {
-    this._description = value;
+    this.#description = value;
   }  
 
   addComment(comment){
-    this._comments.push(comment);
+    this.#comments.push(comment);
   }
 
   isValid() {
-    if (!this._title)
-      this._validationResults.push({
+    if (!this.#title)
+      this.validationResults.push({
         property: 'title',
         message: 'Title is required',
       });
 
-    return !this._validationResults.some();
+    return this.validationResults.length === 0;
   }
 }

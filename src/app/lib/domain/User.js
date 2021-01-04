@@ -1,11 +1,13 @@
 import Entity from "./core/Entity";
-
 export default class User extends Entity {
+  #name;
+
   constructor(name) {
-    this._name = name;
+    super();
+    this.#name = name;
   }
 
   get name(){
-    return this._name;
+    return this.#name;
   }
 }

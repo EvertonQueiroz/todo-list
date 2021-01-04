@@ -1,6 +1,8 @@
 export default class Entity {
+  #validationResults;
+
   constructor(){
-    this._validationResults = [];
+    this.#validationResults = [];
   }
 
   get id() {
@@ -12,6 +14,6 @@ export default class Entity {
   }
 
   get validationResults() {
-    return this._validationResults;
-  }
+    return this.#validationResults;
+  }  
 }
