@@ -10,4 +10,14 @@ export default class User extends Entity {
   get name(){
     return this.#name;
   }
+
+  isValid() {
+    if (!this.#name)
+      this.validationResults.push({
+        property: 'name',
+        message: 'Name is required',
+      });
+
+    return this.validationResults.length === 0;
+  }
 }
